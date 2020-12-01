@@ -74,6 +74,8 @@ def gen_mesh_color(opt, netG, netC, cuda, data, save_path, use_octree=True):
     image_tensor = data['img'].to(device=cuda)
     calib_tensor = data['calib'].to(device=cuda)
 
+    print(image_tensor.size())
+    # TODO: fix here
     netG.filter(image_tensor)
     netC.filter(image_tensor)
     netC.attach(netG.get_im_feat())

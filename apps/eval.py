@@ -77,7 +77,11 @@ class Evaluator:
         # image
         image = Image.open(image_path).convert('RGB')
         image = self.to_tensor(image)
+        # TODO: fix this
+        print(image.size())
+        print(mask.size())
         image = mask.expand_as(image) * image
+        print(image.size())
         return {
             'name': img_name,
             'img': image.unsqueeze(0),
@@ -118,6 +122,7 @@ if __name__ == '__main__':
         try:
             print(image_path, mask_path)
             data = evaluator.load_image(image_path, mask_path)
+            print("Loading completed")
             evaluator.eval(data, True)
         except Exception as e:
            print("error:", e.args)
